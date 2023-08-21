@@ -15,7 +15,7 @@ pipeline {
             steps {
                  echo "----------- build started ----------"
                 sh 'mvn clean deploy'
-                 echo "----------- build completed ----------"
+                 echo "----------- build completed ----------"    
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
             scannerHome = tool 'satish-sonarqube-scanner'
             }
             steps {
-            withSonarQubeEnv('satish-sonarqube-scanner') { // If you have configured more than one global server connection, you can specify its name
+            withSonarQubeEnv('sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
             sh "${scannerHome}/bin/sonar-scanner"
             }
             }
