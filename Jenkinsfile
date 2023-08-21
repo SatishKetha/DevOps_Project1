@@ -27,7 +27,7 @@ pipeline {
             steps {
             
             withSonarQubeEnv('satish-sonarqube-server') {
-                sh" ${scannerHome}/bin/sonar-scanner \
+                sh" ${scannerHome**}/bin/sonar-scanner \
                 -Dsonar.projectKey=satishketha01_devops-project-1 \
                 -Dsonar.sources=. "
             }
