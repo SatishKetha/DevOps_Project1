@@ -19,15 +19,28 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
+
+        steps {
             environment {
             scannerHome = tool 'satish-sonarqube-scanner'
-            }
-            steps {
-            withSonarQubeEnv('satish-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
-            sh "${scannerHome}/bin/sonar-scanner.bat"
-            }
+             }
+            withSonarQubeEnv('satish-sonarqube-server') {
+                sh" ${SCANNER_HOME**}**}/bin/sonar-scanner \
+                -Dsonar.projectKey=satishketha01_devops-project-1 \
+                -Dsonar.sources=. "
             }
         }
+
+
+        // stage('SonarQube analysis') {
+        //     environment {
+        //     scannerHome = tool 'satish-sonarqube-scanner'
+        //     }
+        //     steps {
+        //     withSonarQubeEnv('satish-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
+        //     sh "${scannerHome}/bin/sonar-scanner"
+        //     }
+        //     }
+        // }
     }
 }
