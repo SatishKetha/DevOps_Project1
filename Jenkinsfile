@@ -20,10 +20,12 @@ pipeline {
         }
 
         stage('SonarQube analysis'){
-            steps {
             environment {
-            scannerHome = tool 'satish-sonarqube-scanner'
-             }
+                scannerHome = tool 'satish-sonarqube-scanner'
+            }
+
+            steps {
+            
             withSonarQubeEnv('satish-sonarqube-server') {
                 sh" ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=satishketha01_devops-project-1 \
