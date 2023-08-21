@@ -5,12 +5,18 @@ pipeline {
             label 'maven'
         }
     }
-    stages {
-        stage ('clone-code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/SatishKetha/DevOps_Project1.git'
-            }
 
+    environment {
+    PATH = "/opt/apache-maven-3.9.4/bin:$PATH"
+}
+
+    stages {
+        stage("build"){
+            steps {
+                 echo "----------- build started ----------"
+                sh 'mvn clean deploy'
+                 echo "----------- build completed ----------"
+            }
         }
     }
 }
