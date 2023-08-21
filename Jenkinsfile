@@ -5,4 +5,12 @@ pipeline {
             label 'maven'
         }
     }
+    stages {
+        stage ('clone-code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/SatishKetha/DevOps_Project1.git'
+            }
+
+        }
+    }
 }
