@@ -19,8 +19,8 @@ pipeline {
             }
         }
 
-
-        steps {
+        stage('SonarQube analysis'){
+            steps {
             environment {
             scannerHome = tool 'satish-sonarqube-scanner'
              }
@@ -30,6 +30,10 @@ pipeline {
                 -Dsonar.sources=. "
             }
         }
+        }
+
+
+        
 
 
         // stage('SonarQube analysis') {
