@@ -18,5 +18,16 @@ pipeline {
                  echo "----------- build completed ----------"
             }
         }
+
+        stage('SonarQube analysis') {
+            environment {
+            scannerHome = tool 'satish-sonarqube-scanner'
+            }
+            steps {
+            withSonarQubeEnv('satish-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
+            sh "${scannerHome}/bin/sonar-scanner"
+            }
+            }
+        }
     }
 }
