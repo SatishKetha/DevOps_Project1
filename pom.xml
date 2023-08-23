@@ -8,7 +8,7 @@
 		<version>2.2.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.valaxy</groupId>
+	<groupId>com.satish</groupId>
 	<artifactId>demo-workshop</artifactId>
 	<version>2.1.2</version>
 	<name>demo-workshop</name>
