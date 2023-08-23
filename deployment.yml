@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample_app_dep
-  namespace: sample_app
+  name: sample-app-dep
+  namespace: sample-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  sample_app
+      app:  sample-app
   template:
     metadata:
       labels:
-        app:  sample_app
+        app:  sample-app
     spec:
       imagePullSecrets:
       - name: dockercred
       containers:
-      - name:  sample_app
+      - name:  sample-app
         image: satishk.jfrog.io/satish-docker-local/sample_app:2.1.2
         imagePullPolicy: Always
         ports:
