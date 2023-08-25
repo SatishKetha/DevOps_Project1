@@ -18,36 +18,36 @@ environment {
                  echo "----------- build complted ----------"
             }
         }
-        // stage("test"){
-        //     steps{
-        //         echo "----------- unit test started ----------"
-        //         sh 'mvn surefire-report:report'
-        //          echo "----------- unit test Complted ----------"
-        //     }
-        // }
+        stage("test"){
+            steps{
+                echo "----------- unit test started ----------"
+                sh 'mvn surefire-report:report'
+                 echo "----------- unit test Complted ----------"
+            }
+        }
 
-    //     stage('SonarQube analysis') {
-    //     environment {
-    //       scannerHome = tool 'satish-sonarqube-scanner'
-    //     }
-        //     steps{
-        //     withSonarQubeEnv('satish-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
-        //       sh "${scannerHome}/bin/sonar-scanner"
-        //     }
-        //     }
-        // }
-        // stage("Quality Gate"){
-        //     steps {
-        //         script {
-        //         timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-        //     def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-        //     if (qg.status != 'OK') {
-        //     error "Pipeline aborted due to quality gate failure: ${qg.status}"
-        //     }
-        // }
-        // }
-        //     }
-        // }
+        stage('SonarQube analysis') {
+        environment {
+          scannerHome = tool 'satish-sonarqube-scanner'
+        }
+            steps{
+            withSonarQubeEnv('satish-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
+              sh "${scannerHome}/bin/sonar-scanner"
+            }
+            }
+        }
+        stage("Quality Gate"){
+            steps {
+                script {
+                timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+            def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+            if (qg.status != 'OK') {
+            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+            }
+        }
+        }
+            }
+        }
          stage("Jar Publish") {
         steps {
             script {
@@ -97,24 +97,24 @@ environment {
         }
     }
 
-    stage (" Deploy "){
-        steps {
-            script {
-               sh './deploy.sh'  
-            }
-        }
-    }
+    // stage (" Deploy "){
+    //     steps {
+    //         script {
+    //            sh './deploy.sh'  
+    //         }
+    //     }
+    // }
 
-// stage(" Deploy ") {
-//        steps {
-//          script {
-//             echo '<--------------- Helm Deploy Started --------------->'
-//             sh 'helm install ttrend ttrend-1.0.1.tgz'
-//             echo '<--------------- Helm deploy Ends --------------->'
-//          }
-//        }
-//      }  
+stage(" Deploy ") {
+       steps {
+         script {
+            echo '<--------------- Helm Deploy Started --------------->'
+            sh 'helm install sample-app sample-app-1.0.1'
+            echo '<--------------- Helm deploy Ends --------------->'
+         }
+       }
+}  
 }
 }
 
-//
+
